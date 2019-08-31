@@ -109,17 +109,21 @@ export default class CardView extends Component {
     imageBack: require("../images/card-back.png"),
   };
 
+  componentWillMount() {
+    const { backgroundColor } = this.props;
+    this.setState({ backgroundColor });
+  }
+
   render() {
     const {
       focused,
       brand, name, number, expiry, cvc, customIcons,
-      placeholder, scale, fontFamily, backgroundColor,
+      placeholder, scale, fontFamily,
     } = this.props;
 
     const Icons = { ...defaultIcons, ...customIcons };
     const isAmex = brand === "american-express";
     const shouldFlip = !isAmex && focused === "cvc";
-    this.setState({ backgroundColor });
     const containerSize = { ...BASE_SIZE, height: BASE_SIZE.height * scale };
     const transform = {
       transform: [
