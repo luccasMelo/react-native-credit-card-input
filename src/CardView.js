@@ -86,7 +86,7 @@ export default class CardView extends Component {
     expiry: PropTypes.string,
     cvc: PropTypes.string,
     placeholder: PropTypes.object,
-
+    backgroundColor: PropTypes.string,
     scale: PropTypes.number,
     fontFamily: PropTypes.string,
     imageFront: PropTypes.number,
@@ -109,17 +109,18 @@ export default class CardView extends Component {
     imageBack: require("../images/card-back.png"),
   };
 
-  componentWillMount() {
-    const { backgroundColor } = this.props;
-    this.setState({ backgroundColor });
-  }
+  state={
+    backgroundColor: "black",
+  };
+
 
   render() {
     const {
       focused,
       brand, name, number, expiry, cvc, customIcons,
-      placeholder, scale, fontFamily,
+      placeholder, scale, fontFamily, backgroundColor,
     } = this.props;
+
 
     const Icons = { ...defaultIcons, ...customIcons };
     const isAmex = brand === "american-express";
@@ -144,7 +145,7 @@ export default class CardView extends Component {
           <View>
             <View
 
-              style={[BASE_SIZE, s.cardFace, transform, this.state.backgroundColor]}>
+              style={[BASE_SIZE, s.cardFace, transform, { backgroundColor }]}>
               <Image style={[s.icon]}
                 source={Icons[brand]} />
               <Text
@@ -171,7 +172,7 @@ export default class CardView extends Component {
           </View>
           <View
 
-            style={[BASE_SIZE, s.cardFace, transform, this.state.backgroundColor]}>
+            style={[BASE_SIZE, s.cardFace, transform, { backgroundColor }]}>
             <Text style={[s.baseText, s.cvc, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
               {!cvc ? placeholder.cvc : cvc}
             </Text>
