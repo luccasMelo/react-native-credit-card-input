@@ -150,6 +150,7 @@ export default class CreditCardInput extends Component {
     return (
       <View style={s.container}>
         <CreditCard focused={focused}
+          backgroundColor={this.props.backgroundColor}
           brand={type}
           scale={cardScale}
           fontFamily={cardFontFamily}
